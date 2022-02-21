@@ -1,0 +1,4 @@
+requests==2.26.0
+urllib3==1.26.7
+SQLAlchemy==1.4.28
+vk-api==11.9.7

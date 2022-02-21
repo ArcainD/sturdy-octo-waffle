@@ -1,23 +1,18 @@
-from vk_api.longpoll import VkEventType
-from msg import longpoll, write_msg
-from vk_bot import VkBot
+from tokens import GROUP_TOKEN, PERSONAL_TOKEN, GROUP_ID, APP_ID
+from tokens import DB_LOGIN, DB_PASSWORD, DB_DRIVER, DB_HOST, DB_PORT, DB_NAME
+from classes.vk_bot import VKinderBot
 
-vkbot = VkBot()
 
-for event in longpoll.listen():
-    if event.type == VkEventType.MESSAGE_NEW:
-
-        if event.to_me:
-            request = event.text
-
-            if request.lower() == "привет":
-                write_msg(event.user_id, f"Привет, {vkbot.get_user_name(event.user_id)}. Если хочешь подыскать себе(или кому-то) пару, то я могу с этим помочь!")
-
-            elif request == "пока":
-                write_msg(event.user_id, "Пока((")
-            elif request == 'Для себя':
-                write_msg(event.user_id, f'')
-            elif request == 'Для другого':
-                write_msg(event.user_id, 'Введи VK id человека которому хочешь подыскать пару')
-            else:
-                write_msg(event.user_id, "Ой-ой, напиши мне 'Привет' если хочешь пообщаться")
+if __name__ == '__main__':
+    server = VKinderBot(group_token=GROUP_TOKEN,
+                        person_token=PERSONAL_TOKEN,
+                        group_id=GROUP_ID,
+                        app_id=APP_ID,
+                        db_name=DB_NAME,
+                        db_login=DB_LOGIN,
+                        db_password=DB_PASSWORD,
+                        db_driver=DB_DRIVER,
+                        db_host=DB_HOST,
+                        db_port=DB_PORT,
+                        debug_mode=True)
+    server.start()
